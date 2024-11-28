@@ -1,0 +1,26 @@
+{
+  "name": "assets-store",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/assets-store/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "assets-store:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "assets-store:build:development"
+        },
+        "production": {
+          "buildTarget": "assets-store:build:production"
+        }
+      }
+    }
+  }
+}

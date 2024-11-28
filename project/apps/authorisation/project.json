@@ -1,0 +1,26 @@
+{
+  "name": "authorisation",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/authorisation/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "authorisation:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "authorisation:build:development"
+        },
+        "production": {
+          "buildTarget": "authorisation:build:production"
+        }
+      }
+    }
+  }
+}
