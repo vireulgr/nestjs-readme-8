@@ -1,7 +1,7 @@
 {
-  "name": "assets-store",
+  "name": "authorization",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/assets-store/src",
+  "sourceRoot": "apps/authorization/src",
   "projectType": "application",
   "tags": [],
   "targets": {
@@ -10,15 +10,15 @@
       "defaultConfiguration": "development",
       "dependsOn": ["build"],
       "options": {
-        "buildTarget": "assets-store:build",
+        "buildTarget": "authorization:build",
         "runBuildTargetDependencies": false
       },
       "configurations": {
         "development": {
-          "buildTarget": "assets-store:build:development"
+          "buildTarget": "authorization:build:development"
         },
         "production": {
-          "buildTarget": "assets-store:build:production"
+          "buildTarget": "authorization:build:production"
         }
       }
     }
