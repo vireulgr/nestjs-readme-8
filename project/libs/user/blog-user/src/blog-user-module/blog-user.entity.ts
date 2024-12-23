@@ -1,4 +1,7 @@
 import { Entity, StorableEntity, AuthUser, UserRole } from '../../../../shared/core/src/index';
+import { compare, genSalt, hash } from 'bcrypt';
+
+const SALT_ROUNDS = 10;
 
 export class BlogUserEntity extends Entity implements StorableEntity<AuthUser> {
   public email: string;
@@ -37,5 +40,14 @@ export class BlogUserEntity extends Entity implements StorableEntity<AuthUser> {
       role: this.role,
       passwordHash: this.passwordHash,
     };
+  }
+
+  public async setPassword(password: string): Promise<void> {
+    const salt = await genSalt(SALT_ROUNDS);
+    this.passwordHash = await hash(password, salt);
+  }
+
+  public async comparePassword(password: string): Promise<boolean> {
+    return compare(password, this.passwordHash);
   }
 }
