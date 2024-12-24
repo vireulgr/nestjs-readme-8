@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { BaseMemoryRepository } from '../../../../shared/data-access/src/index';
+import { BaseMemoryRepository } from '@project/data-access'; //'../../../../shared/data-access/src/index';
 
 import { BlogUserEntity } from './blog-user.entity';
 import { BlogUserFactory } from './blog-user.factory';

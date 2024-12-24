@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AuthenticationController } from './authentication.controller';
 import { AuthenticationService } from './authentication.service';
-import { BlogUserModule } from '../../../blog-user/src/index';
+import { BlogUserModule } from '@project/blog-user'; //'../../../blog-user/src/index';
 
 @Module({
   imports: [ BlogUserModule ],

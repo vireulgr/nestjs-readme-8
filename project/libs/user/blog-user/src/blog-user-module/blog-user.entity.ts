@@ -1,4 +1,4 @@
-import { Entity, StorableEntity, AuthUser, UserRole } from '../../../../shared/core/src/index';
+import { Entity, StorableEntity, AuthUser, UserRole } from '@project/core'; //'../../../../shared/core/src/index';
 import { compare, genSalt, hash } from 'bcrypt';
 
 const SALT_ROUNDS = 10;
