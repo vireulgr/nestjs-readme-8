@@ -4,7 +4,7 @@ import { ConflictException, Injectable, NotFoundException, UnauthorizedException
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { UserRole } from '@project/core';
-import { BlogUserRepository, BlogUserEntity } from '@project/blog-user'; // '../../../blog-user/src/blog-user-module/blog-user.entity';
+import { BlogUserRepository, BlogUserEntity } from '@project/blog-user';
 
 const MSG_AUTH_USER_EXISTS = 'User with this email exists';
 const MSG_AUTH_USER_NOT_FOUND = 'User not found';
