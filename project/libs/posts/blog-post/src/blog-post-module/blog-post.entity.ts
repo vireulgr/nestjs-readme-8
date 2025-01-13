@@ -1,53 +1,50 @@
-import { Entity, StorableEntity, AuthUser, UserRole } from '@project/core'; //'../../../../shared/core/src/index';
-import { compare, genSalt, hash } from 'bcrypt';
+import { Entity, StorableEntity } from '@project/core';
+import { BlogPost, Tag, PostType } from '@project/core';
 
-const SALT_ROUNDS = 10;
+export class BlogPostEntity extends Entity implements StorableEntity<BlogPost> {
 
-export class BlogUserEntity extends Entity implements StorableEntity<AuthUser> {
-  public email: string;
-  public firstName: string;
-  public lastName: string;
-  public dateOfBirth: Date;
-  public role: UserRole;
-  public passwordHash: string;
+  postAuthor: string; // user uuid
+  publicationDate: string;
+  createDate: string;
+  isRepost: boolean;
+  isPublished: boolean; // опубликована или черновик
+  tags: Tag[];
+  postType: PostType;
 
-  constructor(user?: AuthUser) {
+  constructor(post?: BlogPost) {
     super();
-    this.populate(user);
+    this.populate(post);
   }
 
-  public populate(user?: AuthUser): void {
-    if (!user) {
+  public populate(post?: BlogPost): void {
+    if (!post) {
       return;
     }
 
     this.id = this.id ?? '';
-    this.email = user.email;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
-    this.dateOfBirth = user.dateOfBirth;
-    this.role = user.role;
-    this.passwordHash = user.passwordHash;
+    this.postAuthor = post.postAuthor;
+    this.publicationDate = post.publicationDate;
+    this.createDate = post.createDate;
+    this.isRepost = post.isRepost;
+    this.isPublished = post.isPublished;
+    this.tags = post.tags;
+    this.postType = post.postType;
   }
 
-  public toPOJO(): AuthUser {
+  public toPOJO(): BlogPost {
     return {
       id: this.id,
-      email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
-      dateOfBirth: this.dateOfBirth,
-      role: this.role,
-      passwordHash: this.passwordHash,
+      postAuthor: this.postAuthor,
+      publicationDate: this.publicationDate,
+      createDate: this.createDate,
+      isRepost: this.isRepost,
+      isPublished: this.isPublished,
+      tags: this.tags,
+      postType: this.postType,
     };
   }
 
-  public async setPassword(password: string): Promise<void> {
-    const salt = await genSalt(SALT_ROUNDS);
-    this.passwordHash = await hash(password, salt);
-  }
-
-  public async comparePassword(password: string): Promise<boolean> {
-    return compare(password, this.passwordHash);
+  public async setAuthor(author: string): Promise<void> {
+    this.postAuthor = author;
   }
 }

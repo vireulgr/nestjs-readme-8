@@ -4,8 +4,9 @@ import { AuthenticationService } from './authentication.service';
 import { BlogUserModule } from '@project/blog-user';
 
 @Module({
-  imports: [ BlogUserModule ],
+  imports: [ BlogUserModule ], // для blog user repository
   controllers: [ AuthenticationController ],
   providers: [ AuthenticationService ],
+  exports: [ AuthenticationService ],
 })
 export class AuthenticationModule {}

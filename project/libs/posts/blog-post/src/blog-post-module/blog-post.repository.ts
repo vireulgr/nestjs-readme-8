@@ -1,20 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { BaseMemoryRepository } from '@project/data-access'; //'../../../../shared/data-access/src/index';
+import { BaseMemoryRepository } from '@project/data-access';
 
-import { BlogUserEntity } from './blog-user.entity';
-import { BlogUserFactory } from './blog-user.factory';
+import { BlogPostEntity } from './blog-post.entity';
+import { BlogPostFactory } from './blog-post.factory';
 
 @Injectable()
-export class BlogUserRepository extends BaseMemoryRepository<BlogUserEntity> {
+export class BlogPostRepository extends BaseMemoryRepository<BlogPostEntity> {
 
-  constructor(public readonly factory: BlogUserFactory) {
+  constructor(public readonly factory: BlogPostFactory) {
     super(factory);
-  }
-
-  // в курсе этот метод не async
-  public async findByEmail(email: string): Promise<BlogUserEntity | null> {
-    const entities = Array.from(this.data.values());
-    const pojo = entities.find((entity) => entity.email === email);
-    return this.factory.create(pojo);
   }
 }

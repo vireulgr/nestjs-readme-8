@@ -5,3 +5,5 @@ export { User } from './lib/types/user.interface';
 
 export { StorableEntity } from './lib/types/storable-entity.interface';
 export { EntityFactory } from './lib/types/entity-factory.interface';
+export { BlogPost, Tag } from './lib/types/blog-post.interface';
+export { PostType } from './lib/types/blog-post-type.enum';

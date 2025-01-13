@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException/*, UnauthorizedException*/ } from '@nestjs/common';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
@@ -8,7 +8,7 @@ import { BlogUserRepository, BlogUserEntity } from '@project/blog-user';
 
 const MSG_AUTH_USER_EXISTS = 'User with this email exists';
 const MSG_AUTH_USER_NOT_FOUND = 'User not found';
-const MSG_AUTH_USER_PASSWORD_WRONG = 'User password is wrong';
+// const MSG_AUTH_USER_PASSWORD_WRONG = 'User password is wrong';
 
 @Injectable()
 export class AuthenticationService {
