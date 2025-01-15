@@ -1,7 +1,10 @@
-import { Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { EditPostBaseDto } from '../dto/edit-post-base.dto';
 import { BlogPostService } from './blog-post.service';
+import { ApiBody, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
+import { EditPostBaseRdo } from '../rdo/edit-post-base.rdo';
 
+@ApiTags('posts')
 @Controller('posts')
 export class BlogPostController {
 
@@ -13,6 +16,10 @@ export class BlogPostController {
   }
 
   @Get('search')
+  @ApiFoundResponse({
+    type: [EditPostBaseRdo]
+  })
+  @ApiNotFoundResponse()
   public searchPosts(@Query('q') searchQuery: string) {
   }
 
@@ -20,8 +27,13 @@ export class BlogPostController {
   public getPost(@Param('id') id: string) {
   }
 
+  @ApiBody({type: EditPostBaseDto})
+  @ApiCreatedResponse({
+    description: 'Successfully created post',
+    type: EditPostBaseRdo,
+  })
   @Post('create')
-  public create(dto: EditPostBaseDto) {
+  public create(@Body() dto: EditPostBaseDto) {
     return this.blogPostService.create(dto);
   }
 

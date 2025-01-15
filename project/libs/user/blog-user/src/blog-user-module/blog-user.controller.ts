@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Logger, Param, Patch } from '@nestjs/common';
+import { ApiBody } from '@nestjs/swagger';
 import { BlogUserService } from './blog-user.service';
 import { EditBlogUserDto } from '../dto/edit-blog-user.dto';
 
@@ -13,6 +14,7 @@ export class BlogUserController {
     this.blogUserService.getUser(id);
   }
 
+  @ApiBody({type: EditBlogUserDto})
   @Patch(':id')
   public editUser(@Body() dto: EditBlogUserDto) {
     Logger.log(`edit blog user id: ${dto.id}`)
