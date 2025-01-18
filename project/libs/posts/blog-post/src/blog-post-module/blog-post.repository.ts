@@ -10,4 +10,7 @@ export class BlogPostRepository extends BaseMemoryRepository<BlogPostEntity> {
   constructor(public readonly factory: BlogPostFactory) {
     super(factory);
   }
+
+  public find(query: string) {
+  }
 }

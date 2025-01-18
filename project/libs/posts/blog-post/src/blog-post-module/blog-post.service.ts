@@ -10,7 +10,7 @@ const MSG_BLOG_POST_NOT_FOUND_BY_ID = 'Cannot edit post; ID not found!';
 @Injectable()
 export class BlogPostService {
 
-  constructor(private repository: BlogPostRepository) {}
+  constructor(private readonly repository: BlogPostRepository) {}
 
   public async delete(id: string): Promise<void> {
     return this.repository.deleteById(id);

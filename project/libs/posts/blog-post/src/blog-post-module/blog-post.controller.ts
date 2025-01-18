@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { EditPostBaseDto } from '../dto/edit-post-base.dto';
-import { BlogPostService } from './blog-post.service';
 import { ApiBody, ApiCreatedResponse, ApiFoundResponse, ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
+
+import { EditPostBaseDto } from '../dto/edit-post-base.dto';
 import { EditPostBaseRdo } from '../rdo/edit-post-base.rdo';
+import { BlogPostService } from './blog-post.service';
 
 @ApiTags('posts')
 @Controller('posts')
@@ -10,7 +11,7 @@ export class BlogPostController {
 
   constructor(public readonly blogPostService: BlogPostService) {}
 
-  // `GET posts/list?sort=&<[-]time|likes|comments|popular>&page=<number>`
+  // пример запроса:`GET posts/list?sort=<[-]time|likes|comments|popular>&page=<number>`
   @Get('list')
   public listPosts(@Query('sort') sortingOptions: string, @Query('page') page: number) {
   }
@@ -25,6 +26,8 @@ export class BlogPostController {
 
   @Get(':id')
   public getPost(@Param('id') id: string) {
+    const result = this.blogPostService.getPost(id);
+    return result.toPOJO();
   }
 
   @ApiBody({type: EditPostBaseDto})
