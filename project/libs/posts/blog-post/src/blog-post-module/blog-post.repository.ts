@@ -11,6 +11,22 @@ export class BlogPostRepository extends BaseMemoryRepository<BlogPostEntity> {
     super(factory);
   }
 
-  public find(query: string) {
+  public async find(query: string): Promise<BlogPostEntity[] | null> {
+    const result = [];
+
+    for (const value of this.data.values()) {
+
+      if (value.id.indexOf(query) === -1) {
+        continue;
+      }
+      if (value.tags.some((tag: string) => tag.indexOf(query))) {
+        continue
+      }
+
+      result.push(value);
+
+    }
+
+    return result;
   }
 }

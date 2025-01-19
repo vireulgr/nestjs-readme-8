@@ -45,6 +45,10 @@ export class BlogPostService {
     return this.repository.findById(id);
   }
 
+  public async search(query: string): Promise<BlogPostEntity[] | null> {
+    return this.repository.find(query);
+  }
+
   public async create(dto: EditPostBaseDto): Promise<EditPostBaseRdo | null> {
     const post = {
       ...dto,
