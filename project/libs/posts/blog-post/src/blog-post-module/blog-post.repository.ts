@@ -11,7 +11,7 @@ export class BlogPostRepository extends BaseMemoryRepository<BlogPostEntity> {
     super(factory);
   }
 
-  public async find(query: string): Promise<BlogPostEntity[] | null> {
+  public async search(query: string): Promise<BlogPostEntity[] | null> {
     const result = [];
 
     for (const value of this.data.values()) {
@@ -24,7 +24,6 @@ export class BlogPostRepository extends BaseMemoryRepository<BlogPostEntity> {
       }
 
       result.push(value);
-
     }
 
     return result;
