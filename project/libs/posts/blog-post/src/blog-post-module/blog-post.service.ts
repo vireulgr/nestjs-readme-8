@@ -34,7 +34,6 @@ export class BlogPostService {
     }
 
     const newPost = new BlogPostEntity(blogPost);
-    // Edit password?
 
     this.repository.save(newPost);
 
@@ -46,7 +45,7 @@ export class BlogPostService {
   }
 
   public async search(query: string): Promise<BlogPostEntity[] | null> {
-    return this.repository.find(query);
+    return this.repository.search(query);
   }
 
   public async create(dto: EditPostBaseDto): Promise<EditPostBaseRdo | null> {

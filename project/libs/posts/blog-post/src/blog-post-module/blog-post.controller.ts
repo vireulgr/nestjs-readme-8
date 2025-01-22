@@ -14,6 +14,7 @@ export class BlogPostController {
   // пример запроса:`GET posts/list?sort=<[-]time|likes|comments|popular>&page=<number>`
   @Get('list')
   public listPosts(@Query('sort') sortingOptions: string, @Query('page') page: number) {
+    return this.blogPostService.listPosts(sortingOptions, page);
   }
 
   @Get('search')
@@ -22,11 +23,12 @@ export class BlogPostController {
   })
   @ApiNotFoundResponse()
   public searchPosts(@Query('q') searchQuery: string) {
+    return this.blogPostService.search(searchQuery);
   }
 
   @Get(':id')
-  public getPost(@Param('id') id: string) {
-    const result = this.blogPostService.getPost(id);
+  public async getPost(@Param('id') id: string) {
+    const result = await this.blogPostService.getPost(id);
     return result.toPOJO();
   }
 
@@ -40,11 +42,14 @@ export class BlogPostController {
     return this.blogPostService.create(dto);
   }
 
+  @ApiBody({type: EditPostBaseDto})
   @Patch('edit')
   public edit(dto: EditPostBaseDto) {
+    return this.blogPostService.edit(dto);
   }
 
   @Delete(':id')
   public delete(@Param('id') id: string) {
+    return this.blogPostService.delete(id);
   }
 }
