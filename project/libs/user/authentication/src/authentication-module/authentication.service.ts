@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
-import { ConflictException, Injectable, NotFoundException/*, UnauthorizedException*/ } from '@nestjs/common';
+import { ConflictException, Inject, Injectable, NotFoundException/*, UnauthorizedException*/ } from '@nestjs/common';
 
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from '../dto/login-user.dto';
 import { UserRole } from '@project/core';
 import { BlogUserRepository, BlogUserEntity } from '@project/blog-user';
+import { mongoConfig } from '@project/user-config';
+import { ConfigType } from '@nestjs/config';
 
 const MSG_AUTH_USER_EXISTS = 'User with this email exists';
 const MSG_AUTH_USER_NOT_FOUND = 'User not found';
@@ -12,7 +14,14 @@ const MSG_AUTH_USER_NOT_FOUND = 'User not found';
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private readonly repository: BlogUserRepository) {}
+  constructor(
+    private readonly repository: BlogUserRepository,
+    @Inject(mongoConfig.KEY)
+    private readonly databaseConfig: ConfigType<typeof mongoConfig>,
+  ) {
+//    console.log(this.databaseConfig.host);
+//    console.log(this.databaseConfig.user);
+  }
 
   public async register(dto: CreateUserDto) {
 
