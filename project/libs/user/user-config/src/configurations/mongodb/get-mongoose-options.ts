@@ -15,6 +15,8 @@ export function getMongooseOptions(): MongooseModuleAsyncOptions {
           databaseName: config.get<string>('mongo.name'),
           authDatabase: config.get<string>('mongo.authBase'),
         }),
+        retryAttempts: 1,
+        retryDelay: 200,
       };
     },
     inject: [ConfigService]
