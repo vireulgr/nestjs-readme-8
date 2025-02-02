@@ -11,7 +11,6 @@ const ENV_FILE_PATH = 'apps/user/user.env';
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      // TODO передать список конфигураций для загрузки
       load: [applicationConfig, mongoConfig],
       envFilePath: ENV_FILE_PATH
     }),
